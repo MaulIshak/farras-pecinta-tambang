@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cuhe4kl0rlhf7"]
+[gd_scene load_steps=15 format=3 uid="uid://cuhe4kl0rlhf7"]
 
 [ext_resource type="Script" uid="uid://chmds7vhs5erb" path="res://Scripts/Player/Player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://ba1ftf3iu54ob" path="res://Sprites/Player/adventurer-Sheet.png" id="1_v0iea"]
@@ -9,8 +9,8 @@
 [ext_resource type="Script" uid="uid://cg0ncku4pqwh1" path="res://Scripts/Player/States/PlayerDash.gd" id="7_gymyn"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qyfof"]
-radius = 5.0
-height = 28.0
+radius = 10.666667
+height = 45.333336
 
 [sub_resource type="Animation" id="Animation_6t5aa"]
 length = 0.001
@@ -44,6 +44,22 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3]
 }
 
+[sub_resource type="Animation" id="Animation_3smsa"]
+resource_name = "jump"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [15, 16, 17, 22]
+}
+
 [sub_resource type="Animation" id="Animation_vgqql"]
 resource_name = "run"
 length = 0.6
@@ -61,9 +77,9 @@ tracks/0/keys = {
 "values": [8, 9, 10, 11, 12, 13]
 }
 
-[sub_resource type="Animation" id="Animation_3smsa"]
-resource_name = "jump"
-length = 0.4
+[sub_resource type="Animation" id="Animation_8erm5"]
+resource_name = "dash"
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -71,15 +87,16 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.16666667),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [15, 16, 17, 22]
+"values": [69, 70, 71]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vgqql"]
 _data = {
 &"RESET": SubResource("Animation_6t5aa"),
+&"dash": SubResource("Animation_8erm5"),
 &"idle": SubResource("Animation_cvnsp"),
 &"jump": SubResource("Animation_3smsa"),
 &"run": SubResource("Animation_vgqql")
@@ -90,12 +107,13 @@ scale = Vector2(1.5, 1.5)
 script = ExtResource("1_cvnsp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_v0iea")
 hframes = 7
 vframes = 11
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 4)
+position = Vector2(0, 5.3333335)
 shape = SubResource("CapsuleShape2D_qyfof")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

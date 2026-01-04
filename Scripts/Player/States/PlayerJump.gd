@@ -11,12 +11,12 @@ func enter() -> void:
 
 func process(_delta: float) -> void:
     jump_attempted = Input.is_action_just_pressed("jump")
-    player.horizontal_input = Input.get_axis("move_left", "move_right")
-    print(player.animation_player.current_animation)
+    player.horizontal_input = sign(Input.get_axis("move_left", "move_right"))
+    # print(player.animation_player.current_animation)
 
 
 func physics_process(delta: float) -> void:
-    print("In PlayerJump physics_process")
+    # print("In PlayerJump physics_process")
     if player.horizontal_input:
         player.velocity.x = move_toward(player.velocity.x, player.horizontal_input * player.SPEED, player.ACCELERATION * delta)
     else:
@@ -45,6 +45,8 @@ func physics_process(delta: float) -> void:
         else:
             finished.emit(IDLE)
     else:
+        if Input.is_action_just_pressed("dash"):
+            finished.emit(DASH)
         if player.coyote_jump_available:
             if player.coyote_timer.is_stopped():
                 player.coyote_timer.start()

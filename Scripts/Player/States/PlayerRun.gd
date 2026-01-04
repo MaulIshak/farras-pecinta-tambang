@@ -8,11 +8,13 @@ func enter() -> void:
     
 
 func process(_delta: float) -> void:
-    player.horizontal_input = Input.get_axis("move_left", "move_right")
+    player.horizontal_input = sign(Input.get_axis("move_left", "move_right"))
     if player.horizontal_input == 0:
         finished.emit(IDLE)
     elif Input.is_action_just_pressed("jump"):
         finished.emit(JUMP)
+    elif Input.is_action_just_pressed("dash"):
+        finished.emit(DASH)
 
     if player.horizontal_input > 0:
         player.sprite.flip_h = false

@@ -689,3 +689,4 @@ limit_enabled = false
 
 [node name="Player" parent="." instance=ExtResource("3_u4ce8")]
 position = Vector2(-1, 22)
+scale = Vector2(1, 1)

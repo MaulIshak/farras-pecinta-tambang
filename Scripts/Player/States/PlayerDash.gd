@@ -1,14 +1,43 @@
 class_name PlayerDash
 extends PlayerState
 
+
+var direction: float = 0.0
+var current_dash_duration: float
+
 func enter() -> void:
-    pass
+    player.velocity.y = 0
+    current_dash_duration = player.DASH_DURATION
+    direction = sign(Input.get_axis("move_left", "move_right"))
+    player.animation_player.play("dash")
+    player.ghost_timer.start()
+
 
 func process(_delta: float) -> void:
-    pass
+    current_dash_duration -= _delta
+    if player.horizontal_input != 0:
+        player.sprite.flip_h = player.horizontal_input < 0
+
+    if current_dash_duration <= 0:
+        if player.horizontal_input != 0:
+            finished.emit(RUN)
+        else:
+            finished.emit(IDLE)
+
 func physics_process(_delta: float) -> void:
-    pass
+    if direction != 0:
+        player.velocity.x = direction * player.SPEED * player.DASH_SPEED_MULTIPLIER
+    else:
+        if player.sprite.flip_h:
+            player.velocity.x = - player.SPEED * player.DASH_SPEED_MULTIPLIER
+        else:
+            player.velocity.x = player.SPEED * player.DASH_SPEED_MULTIPLIER
+
+    player.move_and_slide()
+
+
 func handle_input(_event: InputEvent) -> void:
     pass
+
 func exit() -> void:
-    pass
+    player.ghost_timer.stop()
