@@ -2,7 +2,6 @@
 class_name State
 extends Node
 
-var machine: StateMachine
 
 # Emitted when the state is finished and wants to change to another state
 signal finished(new_state: State)

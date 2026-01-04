@@ -10,11 +10,5 @@ const DASH = "Dash"
 
 func _ready() -> void:
     await owner.ready
-    if owner is Player:
-        player = owner
-    else:
-        push_error("PlayerState must be a child of Player node.")
-
-
-# func _init(player: CharacterBody2D) -> void:
-#     self.player = player
+    player = owner as Player
+    assert(player != null, "The PlayerState state type must be used only in the player scene. It needs the owner to be a Player node.")

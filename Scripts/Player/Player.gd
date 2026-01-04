@@ -2,20 +2,23 @@ class_name Player
 extends CharacterBody2D
 
 # ------------ CONSTANTS ------------
-const SPEED = 350.0 # Base horizontal movement speed
+const SPEED = 200.0 # Base horizontal movement speed
 const ACCELERATION = 1200.0 # Base acceleration
 const FRICTION = 1400.0 # Base friction
 const GRAVITY = 2000.0 # Gravity when moving upwards
 const FALL_GRAVITY = 3000.0 # Gravity when falling downwards
-const JUMP_VELOCITY = -700.0 # Maximum jump strength
+const JUMP_VELOCITY = -600.0 # Maximum jump strength
 
 const INPUT_BUFFER_PATIENCE = 0.1 # Input queue patience time
 const COYOTE_TIME = 0.08 # Coyote patience time
 
 # ------------ VARIABLES ------------
+var horizontal_input: float = 0.0
 var input_buffer: Timer # Reference to the input queue timer
 var coyote_timer: Timer # Reference to the coyote timer
 var coyote_jump_available := true
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var sprite: Sprite2D = $Sprite2D
 
 func _ready() -> void:
 	# Set up input buffer timer
@@ -31,43 +34,6 @@ func _ready() -> void:
 	add_child(coyote_timer)
 	coyote_timer.timeout.connect(coyote_timeout)
 
-func _physics_process(delta) -> void:
-	# Get inputs
-	var horizontal_input := Input.get_axis("move_left", "move_right")
-	var jump_attempted := Input.is_action_just_pressed("jump")
-
-	# Add the gravity and handle jumping
-	if jump_attempted or input_buffer.time_left > 0:
-		if coyote_jump_available: # If jumping on the ground
-			velocity.y = JUMP_VELOCITY
-			coyote_jump_available = false
-		elif jump_attempted: # Queue input buffer if jump was attempted
-			input_buffer.start()
-
-	# Shorten jump if jump key is released
-	if Input.is_action_just_released("jump") and velocity.y < 0:
-		velocity.y = JUMP_VELOCITY / 4
-
-	# Apply gravity and reset coyote jump
-	if is_on_floor():
-		coyote_jump_available = true
-		coyote_timer.stop()
-	else:
-		if coyote_jump_available:
-			if coyote_timer.is_stopped():
-				coyote_timer.start()
-		velocity.y += calculate_gravity() * delta
-
-	# HYandle horizontal motion and friction
-	var floor_damping := 1.0 if is_on_floor() else 0.2 # Set floor damping, friction is less when in air
-	var dash_multiplier := 2 if Input.is_action_pressed("dash") else 1
-	if horizontal_input:
-		velocity.x = move_toward(velocity.x, horizontal_input * SPEED * dash_multiplier, ACCELERATION * delta)
-	else:
-		velocity.x = move_toward(velocity.x, 0, (FRICTION * delta) * floor_damping)
-
-	# Apply velocity
-	move_and_slide()
 
 ## Returns the gravity based on the state of the player
 func calculate_gravity() -> float:

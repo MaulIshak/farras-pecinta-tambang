@@ -12,15 +12,16 @@ var player: CharacterBody2D
 func _ready() -> void:
     for child in get_children():
         if child is State:
-            child.machine = self
             child.finished.connect(change_state)
-        
+
+    await owner.ready
     if current_state:
         current_state.enter()
 
 func _process(delta: float):
     if current_state:
         current_state.process(delta)
+    # print("Current State: %s" % current_state.name)
     
 func _physics_process(delta: float):
     if current_state:
@@ -38,7 +39,6 @@ func change_state(new_state_path: String) -> void:
 
     if new_state and new_state is State:
         current_state = new_state
-        add_child(current_state)
         current_state.enter()
     else:
         push_error("StateMachine: State '%s' not found or is not a State." % new_state_path)
