@@ -41,3 +41,4 @@ func handle_input(_event: InputEvent) -> void:
 
 func exit() -> void:
     player.ghost_timer.stop()
+    player.velocity.x = 0
