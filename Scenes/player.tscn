@@ -1,11 +1,31 @@
-[gd_scene load_steps=8 format=3 uid="uid://cuhe4kl0rlhf7"]
+[gd_scene load_steps=13 format=3 uid="uid://cuhe4kl0rlhf7"]
 
-[ext_resource type="Script" uid="uid://chmds7vhs5erb" path="res://Scripts/player.gd" id="1_cvnsp"]
+[ext_resource type="Script" uid="uid://chmds7vhs5erb" path="res://Scripts/Player/Player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://ba1ftf3iu54ob" path="res://Sprites/Player/adventurer-Sheet.png" id="1_v0iea"]
+[ext_resource type="Script" uid="uid://v6qdisxanc08" path="res://Scripts/Global/StateMachine/StateMachine.gd" id="3_3smsa"]
+[ext_resource type="Script" uid="uid://di00w0yfwfnor" path="res://Scripts/Player/States/PlayerRun.gd" id="4_8erm5"]
+[ext_resource type="Script" uid="uid://cw2xbp11cekuv" path="res://Scripts/Player/States/PlayerJump.gd" id="5_f1ek2"]
+[ext_resource type="Script" uid="uid://jnllcbvvw817" path="res://Scripts/Player/States/PlayerIdle.gd" id="6_tx1dd"]
+[ext_resource type="Script" uid="uid://cg0ncku4pqwh1" path="res://Scripts/Player/States/PlayerDash.gd" id="7_gymyn"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qyfof"]
 radius = 5.0
 height = 28.0
+
+[sub_resource type="Animation" id="Animation_6t5aa"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_cvnsp"]
 resource_name = "idle"
@@ -22,21 +42,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
-}
-
-[sub_resource type="Animation" id="Animation_6t5aa"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_vgqql"]
@@ -80,3 +85,20 @@ shape = SubResource("CapsuleShape2D_qyfof")
 libraries = {
 &"": SubResource("AnimationLibrary_vgqql")
 }
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("3_3smsa")
+metadata/_custom_type_script = "uid://v6qdisxanc08"
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("6_tx1dd")
+metadata/_custom_type_script = "uid://jnllcbvvw817"
+
+[node name="Run" type="Node" parent="StateMachine"]
+script = ExtResource("4_8erm5")
+
+[node name="Jump" type="Node" parent="StateMachine"]
+script = ExtResource("5_f1ek2")
+
+[node name="Dash" type="Node" parent="StateMachine"]
+script = ExtResource("7_gymyn")
