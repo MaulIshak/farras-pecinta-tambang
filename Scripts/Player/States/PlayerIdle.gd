@@ -13,6 +13,8 @@ func process(_delta: float) -> void:
         finished.emit(JUMP)
     elif Input.is_action_just_pressed("dash"):
         finished.emit(DASH)
+    elif not player.is_on_floor():
+        finished.emit(FALL)
 
 func physics_process(_delta: float) -> void:
     player.velocity.y += player.calculate_gravity() * _delta

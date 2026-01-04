@@ -7,6 +7,7 @@ const IDLE = "Idle"
 const RUN = "Run"
 const JUMP = "Jump"
 const DASH = "Dash"
+const FALL = "Fall"
 
 func _ready() -> void:
     await owner.ready

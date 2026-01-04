@@ -20,11 +20,11 @@ var input_buffer: Timer # Reference to the input queue timer
 var coyote_timer: Timer # Reference to the coyote timer
 var coyote_jump_available := true
 var ghost_timer: Timer
+var is_dash_used_in_air: bool = false
 
 var dash_ghost_sprite: PackedScene
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite2D = $Sprite2D
-
 
 func _ready() -> void:
     dash_ghost_sprite = preload("res://Scenes/dash_ghost.tscn")
