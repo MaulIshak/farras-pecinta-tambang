@@ -3,10 +3,10 @@ extends CharacterBody2D
 
 # ------------ CONSTANTS ------------
 const SPEED = 300.0 # Base horizontal movement speed
-const ACCELERATION = 1200.0 # Base acceleration
+const ACCELERATION = 1500.0 # Base acceleration
 const FRICTION = 1400.0 # Base friction
 const GRAVITY = 2000.0 # Gravity when moving upwards
-const FALL_GRAVITY = 3000.0 # Gravity when falling downwards
+const FALL_GRAVITY = 2000.0 # Gravity when falling downwards
 const JUMP_VELOCITY = -600.0 # Maximum jump strength
 const DASH_SPEED_MULTIPLIER = 2.5
 const DASH_DURATION: float = 0.2

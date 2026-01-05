@@ -39,6 +39,16 @@ func physics_process(_delta: float) -> void:
 
     player.move_and_slide()
 
+    if player.is_on_wall():
+        player.velocity.x = 0
+        if player.is_on_floor():
+            if player.horizontal_input != 0:
+                finished.emit(RUN)
+            else:
+                finished.emit(IDLE)
+        else:
+            finished.emit(FALL)
+
 
 func handle_input(_event: InputEvent) -> void:
     pass
