@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cuhe4kl0rlhf7"]
+[gd_scene load_steps=18 format=3 uid="uid://cuhe4kl0rlhf7"]
 
 [ext_resource type="Script" uid="uid://chmds7vhs5erb" path="res://Scripts/Player/Player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://ba1ftf3iu54ob" path="res://Sprites/Player/adventurer-Sheet.png" id="1_v0iea"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" uid="uid://cg0ncku4pqwh1" path="res://Scripts/Player/States/PlayerDash.gd" id="7_gymyn"]
 [ext_resource type="Script" uid="uid://dm1dn5p4dy1wb" path="res://Scripts/Player/States/PlayerFalling.gd" id="8_8erm5"]
 [ext_resource type="Script" uid="uid://binh76eqlnq6t" path="res://Scripts/Player/States/PlayerSpell.gd" id="9_f1ek2"]
-[ext_resource type="PackedScene" uid="uid://bnbn43fpwi6kk" path="res://Scenes/spell_projectile.tscn" id="10_tx1dd"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qyfof"]
 radius = 10.666667
@@ -165,5 +164,4 @@ metadata/_custom_type_script = "uid://dm1dn5p4dy1wb"
 
 [node name="Spell" type="Node" parent="StateMachine"]
 script = ExtResource("9_f1ek2")
-projectile_scene = ExtResource("10_tx1dd")
 metadata/_custom_type_script = "uid://dm1dn5p4dy1wb"
