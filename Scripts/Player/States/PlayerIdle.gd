@@ -15,6 +15,15 @@ func process(_delta: float) -> void:
         finished.emit(DASH)
     elif not player.is_on_floor():
         finished.emit(FALL)
+    elif Input.is_action_just_pressed("attack"):
+        if player.basicAttackComboTimer.time_left > 0 or player.currentAttackCombo == 0:
+            match player.currentAttackCombo:
+                0:
+                    finished.emit(ATTACK1)
+                1:
+                    finished.emit(ATTACK2)
+                2:
+                    finished.emit(ATTACK3)
 
 func physics_process(_delta: float) -> void:
     player.velocity.y += player.calculate_gravity() * _delta

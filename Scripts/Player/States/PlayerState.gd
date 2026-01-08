@@ -8,6 +8,9 @@ const RUN = "Run"
 const JUMP = "Jump"
 const DASH = "Dash"
 const FALL = "Fall"
+const ATTACK1 = "Attack1"
+const ATTACK2 = "Attack2"
+const ATTACK3 = "Attack3"
 
 func _ready() -> void:
     await owner.ready
