@@ -5,11 +5,11 @@ func enter() -> void:
 	player.animation_player.play("fall")
 
 func process(_delta: float) -> void:
-    player.horizontal_input = sign(Input.get_axis("move_left", "move_right"))
-    if player.horizontal_input > 0:
-        player.sprite.scale.x = player.base_scale.x
-    elif player.horizontal_input < 0:
-        player.sprite.scale.x = -player.base_scale.x
+	player.horizontal_input = sign(Input.get_axis("move_left", "move_right"))
+	if player.horizontal_input > 0:
+		player.sprite.scale.x = player.base_scale.x
+	elif player.horizontal_input < 0:
+		player.sprite.scale.x = -player.base_scale.x
 
 func physics_process(delta: float) -> void:
 	player.velocity.y += player.calculate_gravity() * delta

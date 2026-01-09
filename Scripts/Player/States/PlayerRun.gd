@@ -19,21 +19,21 @@ func process(_delta: float) -> void:
 		finished.emit(SPELL)
 	elif not player.is_on_floor():
 		finished.emit(FALL)
-    elif Input.is_action_just_pressed("attack"):
-        if player.basicAttackComboTimer.time_left > 0 or player.currentAttackCombo == 0:
-            match player.currentAttackCombo:
-                0:
-                    finished.emit(ATTACK1)
-                1:
-                    finished.emit(ATTACK2)
-                2:
-                    finished.emit(ATTACK3)
+	elif Input.is_action_just_pressed("attack"):
+		if player.basicAttackComboTimer.time_left > 0 or player.currentAttackCombo == 0:
+			match player.currentAttackCombo:
+				0:
+					finished.emit(ATTACK1)
+				1:
+					finished.emit(ATTACK2)
+				2:
+					finished.emit(ATTACK3)
 
 
-    if player.horizontal_input > 0:
-        player.sprite.scale.x = player.base_scale.x
-    elif player.horizontal_input < 0:
-        player.sprite.scale.x = -player.base_scale.x
+	if player.horizontal_input > 0:
+		player.sprite.scale.x = player.base_scale.x
+	elif player.horizontal_input < 0:
+		player.sprite.scale.x = -player.base_scale.x
 
 func physics_process(delta: float) -> void:
 	player.velocity.y += player.calculate_gravity() * delta

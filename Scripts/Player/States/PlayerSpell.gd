@@ -34,7 +34,7 @@ func physics_process(delta: float) -> void:
 	# 5. GRAVITY SUSPENSION
 	# We specifically DO NOT call player.calculate_gravity() here.
 	# We keep Y velocity at 0 to create the "float" effect.
-	player.velocity.y = 0 
+	player.velocity.y = 0
 	
 	player.move_and_slide()
 
@@ -48,24 +48,24 @@ func exit() -> void:
 
 func fire_spell() -> void:
 	# Determine facing direction (Assumes sprite.flip_h = true is LEFT)
-	var facing_dir = -1.0 if player.sprite.flip_h else 1.0
+	var facing_dir = -1.0 if player.sprite.scale.x < 0 else 1.0
 	
 	# A. Spawn Projectile
 	if projectile_scene:
 		var projectile = projectile_scene.instantiate()
-		projectile.position = player.position 
+		projectile.position = player.position
 		projectile.direction = facing_dir # Pass direction to bullet
 		get_tree().current_scene.add_child(projectile)
 	else:
 		print("No Projectile Scene assigned in Inspector!")
 
 	# B. Apply Recoil (Push opposite to facing direction)
-	player.velocity.x = -facing_dir * recoil_strength
+	player.velocity.x = - facing_dir * recoil_strength
 	
 func _on_cast_finished() -> void:
 	# Return to Fall if in air, Idle if on ground
 	# (Adjust state names string/enum based on your State Machine setup)
 	if player.is_on_floor():
-		finished.emit("Idle") 
+		finished.emit("Idle")
 	else:
 		finished.emit("Fall")

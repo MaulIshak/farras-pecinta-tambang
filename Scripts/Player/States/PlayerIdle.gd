@@ -20,15 +20,6 @@ func process(_delta: float) -> void:
 		finished.emit(SPELL)
 	elif not player.is_on_floor():
 		finished.emit(FALL)
-	player.horizontal_input = sign(Input.get_axis("move_left", "move_right"))
-	if player.horizontal_input != 0:
-		finished.emit(RUN)
-	elif Input.is_action_just_pressed("jump"):
-		finished.emit(JUMP)
-	elif Input.is_action_just_pressed("dash"):
-		finished.emit(DASH)
-	elif not player.is_on_floor():
-		finished.emit(FALL)
 	elif Input.is_action_just_pressed("attack"):
 		if player.basicAttackComboTimer.time_left > 0 or player.currentAttackCombo == 0:
 			match player.currentAttackCombo:

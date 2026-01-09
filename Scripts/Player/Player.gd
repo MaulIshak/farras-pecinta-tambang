@@ -27,13 +27,12 @@ var dash_ghost_sprite: PackedScene
 var currentAttackCombo: int = 0
 var attack_buffered: bool = false
 # var attack_held: bool = false
-var base_scale: Vector2 = Vector2(1.5,1.5)
+var base_scale: Vector2 = Vector2(1.5, 1.5)
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var basicAttackRateTimer: Timer = $BasicAttackRateTimer
 @onready var basicAttackComboTimer: Timer = $BasicAttackComboTimer
-
 
 
 @export var base_damage: int = 10
@@ -52,7 +51,6 @@ func _ready() -> void:
 	input_buffer.wait_time = INPUT_BUFFER_PATIENCE
 	input_buffer.one_shot = true
 	add_child(input_buffer)
-
 	# Set up ghost timer
 	ghost_timer = Timer.new()
 	ghost_timer.wait_time = GHOST_SPAWN_INTERVAL

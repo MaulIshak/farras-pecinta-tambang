@@ -14,9 +14,9 @@ func enter() -> void:
 	player.ghost_timer.start()
 
 func process(_delta: float) -> void:
-    current_dash_duration -= _delta
-    if player.horizontal_input != 0:
-        player.sprite.scale.x = player.base_scale.x * player.horizontal_input
+	current_dash_duration -= _delta
+	if player.horizontal_input != 0:
+		player.sprite.scale.x = player.base_scale.x * player.horizontal_input
 
 	if current_dash_duration <= 0:
 		if player.is_on_floor():
@@ -29,13 +29,13 @@ func process(_delta: float) -> void:
 		
 
 func physics_process(_delta: float) -> void:
-    if direction != 0:
-        player.velocity.x = direction * player.SPEED * player.DASH_SPEED_MULTIPLIER
-    else:
-        if player.sprite.scale.x < 0:
-            player.velocity.x = - player.SPEED * player.DASH_SPEED_MULTIPLIER
-        else:
-            player.velocity.x = player.SPEED * player.DASH_SPEED_MULTIPLIER
+	if direction != 0:
+		player.velocity.x = direction * player.SPEED * player.DASH_SPEED_MULTIPLIER
+	else:
+		if player.sprite.scale.x < 0:
+			player.velocity.x = - player.SPEED * player.DASH_SPEED_MULTIPLIER
+		else:
+			player.velocity.x = player.SPEED * player.DASH_SPEED_MULTIPLIER
 
 	player.move_and_slide()
 
