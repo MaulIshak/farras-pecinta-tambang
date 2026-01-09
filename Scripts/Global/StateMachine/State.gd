@@ -7,12 +7,12 @@ extends Node
 signal finished(new_state: State)
 
 func enter() -> void:
-    pass
+	pass
 func process(_delta: float) -> void:
-    pass
+	pass
 func physics_process(_delta: float) -> void:
-    pass
+	pass
 func handle_input(_event: InputEvent) -> void:
-    pass
+	pass
 func exit() -> void:
-    pass
+	pass

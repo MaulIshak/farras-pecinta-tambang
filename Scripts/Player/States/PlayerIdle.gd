@@ -5,7 +5,21 @@ func enter() -> void:
 	player.velocity.x = 0
 	player.animation_player.play("idle")
 		
+	player.velocity.x = 0
+	player.animation_player.play("idle")
+		
 func process(_delta: float) -> void:
+	player.horizontal_input = sign(Input.get_axis("move_left", "move_right"))
+	if player.horizontal_input != 0:
+		finished.emit(RUN)
+	elif Input.is_action_just_pressed("jump"):
+		finished.emit(JUMP)
+	elif Input.is_action_just_pressed("dash"):
+		finished.emit(DASH)
+	elif Input.is_action_just_pressed("spell"):
+		finished.emit(SPELL)
+	elif not player.is_on_floor():
+		finished.emit(FALL)
 	player.horizontal_input = sign(Input.get_axis("move_left", "move_right"))
 	if player.horizontal_input != 0:
 		finished.emit(RUN)
