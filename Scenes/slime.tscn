@@ -1,8 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://cb2b854g1hs3"]
+[gd_scene load_steps=14 format=3 uid="uid://cb2b854g1hs3"]
 
-[ext_resource type="Script" uid="uid://dgdhpw6pj1ajc" path="res://Scripts/Enemy.gd" id="1_aiwxb"]
+[ext_resource type="Script" uid="uid://da4jiwqj7deeg" path="res://Scripts/Enemies/Slime/Slime.gd" id="1_f4si1"]
 [ext_resource type="Shader" uid="uid://cwqcj06dgfldb" path="res://Scenes/hit.gdshader" id="2_paq7w"]
 [ext_resource type="Texture2D" uid="uid://r1vxjfh5wvse" path="res://Sprites/slime-Sheet.png" id="3_f4si1"]
+[ext_resource type="Script" uid="uid://v6qdisxanc08" path="res://Scripts/Global/StateMachine/StateMachine.gd" id="4_paq7w"]
+[ext_resource type="Script" uid="uid://cypinywugkm5i" path="res://Scripts/Enemies/Slime/States/SlimePatrol.gd" id="5_f4si1"]
+[ext_resource type="Script" uid="uid://bust0uknn03nr" path="res://Scripts/Enemies/Slime/States/SlimeHit.gd" id="6_5gljc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wqftc"]
 shader = ExtResource("2_paq7w")
@@ -78,9 +81,12 @@ _data = {
 &"idle": SubResource("Animation_wqftc")
 }
 
-[node name="Slime" type="Area2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f4si1"]
+size = Vector2(20, 12)
+
+[node name="Slime" type="CharacterBody2D"]
 scale = Vector2(3, 3)
-script = ExtResource("1_aiwxb")
+script = ExtResource("1_f4si1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_wqftc")
@@ -97,5 +103,28 @@ libraries = {
 &"": SubResource("AnimationLibrary_6hjy0")
 }
 autoplay = "idle"
+
+[node name="FloorDetector" type="RayCast2D" parent="."]
+position = Vector2(-15, 0)
+target_position = Vector2(0, 20)
+
+[node name="WallDetector" type="RayCast2D" parent="."]
+position = Vector2(0, 5)
+target_position = Vector2(-15, 0)
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("4_paq7w")
+
+[node name="Patrol" type="Node" parent="StateMachine"]
+script = ExtResource("5_f4si1")
+
+[node name="Hit" type="Node" parent="StateMachine"]
+script = ExtResource("6_5gljc")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_f4si1")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

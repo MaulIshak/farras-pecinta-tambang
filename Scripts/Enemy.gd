@@ -1,4 +1,4 @@
-extends Area2D
+extends CharacterBody2D
 
 @export var base_health: int = 100
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
