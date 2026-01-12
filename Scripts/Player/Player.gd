@@ -34,6 +34,8 @@ var base_scale: Vector2 = Vector2(1.5, 1.5)
 @onready var basicAttackRateTimer: Timer = $BasicAttackRateTimer
 @onready var basicAttackComboTimer: Timer = $BasicAttackComboTimer
 
+@onready var dashParticle: GPUParticles2D = $DashParticle
+
 
 @export var base_damage: int = 10
 
@@ -45,12 +47,6 @@ func _ready() -> void:
 	input_buffer.wait_time = INPUT_BUFFER_PATIENCE
 	input_buffer.one_shot = true
 	add_child(input_buffer)
-	dash_ghost_sprite = preload("res://Scenes/dash_ghost.tscn")
-	# Set up input buffer timer
-	input_buffer = Timer.new()
-	input_buffer.wait_time = INPUT_BUFFER_PATIENCE
-	input_buffer.one_shot = true
-	add_child(input_buffer)
 	# Set up ghost timer
 	ghost_timer = Timer.new()
 	ghost_timer.wait_time = GHOST_SPAWN_INTERVAL
@@ -63,18 +59,8 @@ func _ready() -> void:
 	coyote_timer.one_shot = true
 	add_child(coyote_timer)
 	coyote_timer.timeout.connect(coyote_timeout)
-	# Set up ghost timer
-	ghost_timer = Timer.new()
-	ghost_timer.wait_time = GHOST_SPAWN_INTERVAL
-	add_child(ghost_timer)
-	ghost_timer.timeout.connect(_add_ghost_on_timeout)
-	
-	# Set up coyote timer
-	coyote_timer = Timer.new()
-	coyote_timer.wait_time = COYOTE_TIME
-	coyote_timer.one_shot = true
-	add_child(coyote_timer)
-	coyote_timer.timeout.connect(coyote_timeout)
+
+	dashParticle.emitting = false
 
 func _process(_delta: float) -> void:
 	pass
@@ -112,7 +98,7 @@ func _on_basic_attack_combo_timer_timeout() -> void:
 
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
-	var enemy = area.get_parent() 
+	var enemy = area.get_parent()
 	
 	if enemy.has_method("take_damage"):
 		enemy.take_damage(base_damage)

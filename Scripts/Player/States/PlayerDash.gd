@@ -12,6 +12,7 @@ func enter() -> void:
 	direction = sign(Input.get_axis("move_left", "move_right"))
 	player.animation_player.play("dash")
 	player.ghost_timer.start()
+	player.dashParticle.emitting = true
 
 func process(_delta: float) -> void:
 	current_dash_duration -= _delta
@@ -56,3 +57,4 @@ func handle_input(_event: InputEvent) -> void:
 func exit() -> void:
 	player.ghost_timer.stop()
 	player.velocity.x = 0
+	player.dashParticle.emitting = false
