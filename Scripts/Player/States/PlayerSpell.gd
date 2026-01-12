@@ -55,6 +55,10 @@ func fire_spell() -> void:
 		var projectile = projectile_scene.instantiate()
 		projectile.position = player.position
 		projectile.direction = facing_dir # Pass direction to bullet
+
+		var projectileSprite: Sprite2D = projectile.get_node("Sprite2D")
+		projectileSprite.scale.x *= facing_dir
+
 		get_tree().current_scene.add_child(projectile)
 	else:
 		print("No Projectile Scene assigned in Inspector!")

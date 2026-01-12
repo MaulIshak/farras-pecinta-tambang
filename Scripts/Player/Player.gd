@@ -92,18 +92,16 @@ func _input(event: InputEvent) -> void:
 ## Returns the gravity based on the state of the player
 func calculate_gravity() -> float:
 	return GRAVITY if velocity.y < 0 else FALL_GRAVITY
-	return GRAVITY if velocity.y < 0 else FALL_GRAVITY
 
 ## Reset coyote jump
 func coyote_timeout() -> void:
-	coyote_jump_available = false
 	coyote_jump_available = false
 
 func _add_ghost_on_timeout() -> void:
 	# print("Adding dash ghost")
 	var ghost: Sprite2D = dash_ghost_sprite.instantiate()
 	ghost.position = position
-	ghost.flip_h = sprite.flip_h
+	ghost.flip_h = sprite.scale.x < 0
 	ghost.texture = sprite.texture
 	ghost.modulate = sprite.modulate
 	get_parent().add_child(ghost)
