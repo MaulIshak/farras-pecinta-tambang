@@ -114,4 +114,7 @@ func _on_basic_attack_combo_timer_timeout() -> void:
 
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
-	area.take_damage(base_damage)
+	var enemy = area.get_parent() 
+	
+	if enemy.has_method("take_damage"):
+		enemy.take_damage(base_damage)
