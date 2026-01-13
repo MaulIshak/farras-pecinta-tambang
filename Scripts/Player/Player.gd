@@ -36,7 +36,6 @@ var base_scale: Vector2 = Vector2(1.5, 1.5)
 
 @onready var dashParticle: GPUParticles2D = $DashParticle
 
-
 @export var base_damage: int = 10
 
 
@@ -63,7 +62,10 @@ func _ready() -> void:
 	dashParticle.emitting = false
 
 func _process(_delta: float) -> void:
-	pass
+	if horizontal_input > 0:
+		sprite.scale.x = base_scale.x
+	elif horizontal_input < 0:
+		sprite.scale.x = - base_scale.x
 	# attack_held = Input.is_action_pressed("attack")
 
 	# if attack_held:

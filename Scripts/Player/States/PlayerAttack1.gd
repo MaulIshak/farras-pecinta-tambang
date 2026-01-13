@@ -20,6 +20,8 @@ func process(_delta: float) -> void:
 			finished.emit(ATTACK2)
 			return
 
+        
+
 	if not player.animation_player.is_playing():
 		player.basicAttackRateTimer.stop()
 		if player.horizontal_input != 0:

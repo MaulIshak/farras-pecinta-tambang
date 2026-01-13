@@ -7,8 +7,6 @@ extends Node
 	return initial_state if initial_state != null else get_child(0)
 ).call()
 
-var player: CharacterBody2D
-
 func _ready() -> void:
 	for child in get_children():
 		if child is State:
