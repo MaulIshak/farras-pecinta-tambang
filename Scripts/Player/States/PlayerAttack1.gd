@@ -10,6 +10,7 @@ func enter() -> void:
 	player.attack_buffered = false
 
 func process(_delta: float) -> void:
+	player.horizontal_input = sign(Input.get_axis("move_left", "move_right"))
 	if Input.is_action_just_pressed("attack"):
 		player.attack_buffered = true
 
@@ -30,7 +31,7 @@ func process(_delta: float) -> void:
 func physics_process(delta: float) -> void:
 	var floor_damping: float = 1.0 if player.is_on_floor() else 0.2
 	if player.horizontal_input != 0:
-		player.velocity.x = move_toward(player.velocity.x, player.horizontal_input * player.SPEED * 0.25, player.ACCELERATION * delta)
+		player.velocity.x = move_toward(player.velocity.x, player.horizontal_input * player.SPEED, player.ACCELERATION * delta)
 	else:
 		player.velocity.x = move_toward(player.velocity.x, 0, (player.FRICTION * delta) * floor_damping)
 	player.velocity.y += player.calculate_gravity() * delta

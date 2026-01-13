@@ -8,7 +8,7 @@ func enter() -> void:
 	
 
 func process(_delta: float) -> void:
-	player.horizontal_input = sign(Input.get_axis("move_left", "move_right"))
+	# player.horizontal_input = sign(Input.get_axis("move_left", "move_right"))
 	if player.horizontal_input == 0:
 		finished.emit(IDLE)
 	elif Input.is_action_just_pressed("jump"):
