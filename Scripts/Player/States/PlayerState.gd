@@ -12,6 +12,7 @@ const SPELL = "Spell"
 const ATTACK1 = "Attack1"
 const ATTACK2 = "Attack2"
 const ATTACK3 = "Attack3"
+const GOT_HIT = "Hit"
 
 func _ready() -> void:
 	await owner.ready

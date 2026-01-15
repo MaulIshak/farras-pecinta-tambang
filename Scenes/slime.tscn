@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cb2b854g1hs3"]
+[gd_scene load_steps=17 format=3 uid="uid://cb2b854g1hs3"]
 
 [ext_resource type="Script" uid="uid://da4jiwqj7deeg" path="res://Scripts/Enemies/Slime/Slime.gd" id="1_f4si1"]
 [ext_resource type="Shader" uid="uid://cwqcj06dgfldb" path="res://Scenes/hit.gdshader" id="2_paq7w"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://v6qdisxanc08" path="res://Scripts/Global/StateMachine/StateMachine.gd" id="4_paq7w"]
 [ext_resource type="Script" uid="uid://cypinywugkm5i" path="res://Scripts/Enemies/Slime/States/SlimePatrol.gd" id="5_f4si1"]
 [ext_resource type="Script" uid="uid://bust0uknn03nr" path="res://Scripts/Enemies/Slime/States/SlimeHit.gd" id="6_5gljc"]
+[ext_resource type="PackedScene" uid="uid://bn2x23kqfvo5p" path="res://Scenes/hitbox.tscn" id="7_vblni"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wqftc"]
 shader = ExtResource("2_paq7w")
@@ -84,8 +85,14 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f4si1"]
 size = Vector2(20, 12)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vblni"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e388w"]
+size = Vector2(17.333336, 8.666668)
+
 [node name="Slime" type="CharacterBody2D"]
 scale = Vector2(3, 3)
+collision_layer = 4
 script = ExtResource("1_f4si1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -126,5 +133,14 @@ script = ExtResource("6_5gljc")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_f4si1")
+
+[node name="Hitbox" parent="." instance=ExtResource("7_vblni")]
+damage = 1
+collision_shape = SubResource("RectangleShape2D_vblni")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0.66666716, 4.6666675)
+shape = SubResource("RectangleShape2D_e388w")
+debug_color = Color(0.972549, 0, 0, 0.45882353)
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

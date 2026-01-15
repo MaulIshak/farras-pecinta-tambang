@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cuhe4kl0rlhf7"]
+[gd_scene load_steps=31 format=3 uid="uid://cuhe4kl0rlhf7"]
 
 [ext_resource type="Script" uid="uid://chmds7vhs5erb" path="res://Scripts/Player/Player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://ba1ftf3iu54ob" path="res://Sprites/Player/adventurer-Sheet.png" id="1_v0iea"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://c61is2plgonyp" path="res://Scripts/Player/States/PlayerAttack3.gd" id="11_pu2lt"]
 [ext_resource type="Script" uid="uid://binh76eqlnq6t" path="res://Scripts/Player/States/PlayerSpell.gd" id="12_ukyrk"]
 [ext_resource type="PackedScene" uid="uid://bnbn43fpwi6kk" path="res://Scenes/spell_projectile.tscn" id="13_7dp3o"]
+[ext_resource type="Script" uid="uid://bdurvqmybni5f" path="res://Scripts/Player/States/PlayerHit.gd" id="14_7dp3o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gymyn"]
 size = Vector2(12.527778, 18)
@@ -298,6 +299,9 @@ scale_curve = SubResource("CurveTexture_7dp3o")
 turbulence_enabled = true
 turbulence_noise_strength = 5.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ukyrk"]
+radius = 7.363574
+
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(1.5, 1.5)
 collision_layer = 2
@@ -364,6 +368,9 @@ script = ExtResource("12_ukyrk")
 projectile_scene = ExtResource("13_7dp3o")
 metadata/_custom_type_script = "uid://binh76eqlnq6t"
 
+[node name="Hit" type="Node" parent="StateMachine"]
+script = ExtResource("14_7dp3o")
+
 [node name="BasicAttackComboTimer" type="Timer" parent="."]
 wait_time = 0.7
 one_shot = true
@@ -377,5 +384,15 @@ amount = 80
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_h4iuc")
 
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="HurtboxCollision" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 6)
+shape = SubResource("CircleShape2D_ukyrk")
+debug_color = Color(0.972549, 0, 0, 0.45882353)
+
 [connection signal="area_entered" from="Sprite2D/Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="timeout" from="BasicAttackComboTimer" to="." method="_on_basic_attack_combo_timer_timeout"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
