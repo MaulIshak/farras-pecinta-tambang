@@ -5,6 +5,7 @@ var character: Slime
 
 const PATROL = "Patrol"
 const HIT = "Hit"
+const DIE = "Die"
 
 func _ready() -> void:
 	await owner.ready

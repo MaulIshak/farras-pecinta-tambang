@@ -26,14 +26,8 @@ func _physics_process(delta: float) -> void:
 
 func take_damage(amount: int) -> void:
 	base_health -= amount
-	if base_health <= 0:
-		die()
-	else:
-		print("Slime is taking damage :<")
-		state_machine.change_state(SlimeState.HIT)
-
-func die() -> void:
-	queue_free()
+	print("Slime is taking damage :<")
+	state_machine.change_state(SlimeState.HIT)
 
 func flip_direction() -> void:
 	facing_direction *= -1
