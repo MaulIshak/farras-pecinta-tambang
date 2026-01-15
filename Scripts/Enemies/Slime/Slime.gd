@@ -10,6 +10,7 @@ extends CharacterBody2D
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var wall_detector: RayCast2D = $WallDetector
 @onready var floor_detector: RayCast2D = $FloorDetector
+var last_hit_position = Vector2.ZERO
 
 # 1 is Right, -1 is Left
 var facing_direction: int = -1
@@ -24,8 +25,9 @@ func _physics_process(delta: float) -> void:
 		velocity.y += gravity * delta
 	move_and_slide()
 
-func take_damage(amount: int) -> void:
+func take_damage(amount: int, hit_position: Vector2 = Vector2.ZERO) -> void:
 	base_health -= amount
+	last_hit_position = hit_position
 	if base_health <= 0:
 		die()
 	else:

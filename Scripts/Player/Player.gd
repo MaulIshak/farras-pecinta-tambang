@@ -117,7 +117,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 	var enemy = area.get_parent()
 	
 	if enemy.has_method("take_damage"):
-		enemy.take_damage(base_damage)
+		enemy.take_damage(base_damage, self.global_position)
 
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:

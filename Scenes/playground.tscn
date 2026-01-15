@@ -1337,6 +1337,7 @@ tile_set = SubResource("TileSet_qyfof")
 
 [node name="Slime" parent="." instance=ExtResource("3_qyfof")]
 position = Vector2(-2389, 183)
+base_health = 999
 
 [node name="Player" parent="." instance=ExtResource("3_u4ce8")]
 position = Vector2(-2816, -71.999985)

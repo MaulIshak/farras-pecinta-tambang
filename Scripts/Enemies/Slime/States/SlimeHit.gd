@@ -5,8 +5,12 @@ extends SlimeState
 
 func enter() -> void:
 	character.animation_player.play("hit")
+	var direction_to_last_hit = character.global_position.direction_to(character.last_hit_position)
+	print(character.global_position, character.last_hit_position)
+	print(direction_to_last_hit)
+	var dir = -1 if direction_to_last_hit.x >= 0 else 1
 	# Knockback effect
-	character.velocity.x = - character.facing_direction * recoil_strength
+	character.velocity.x = dir * recoil_strength
 	
 	# Connect to animation finished signal specifically for this state
 	if not character.animation_player.animation_finished.is_connected(_on_animation_finished):
