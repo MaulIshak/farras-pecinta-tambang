@@ -13,6 +13,7 @@ func enter() -> void:
 	player.animation_player.play("dash")
 	player.ghost_timer.start()
 	player.dashParticle.emitting = true
+	player.dash_buffered = false
 
 func process(_delta: float) -> void:
 	current_dash_duration -= _delta

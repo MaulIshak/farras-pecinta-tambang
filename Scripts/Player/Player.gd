@@ -10,8 +10,8 @@ const FALL_GRAVITY = 2000.0 # Gravity when falling downwards
 const JUMP_VELOCITY = -600.0 # Maximum jump strength
 const DASH_SPEED_MULTIPLIER = 2.5
 const DASH_DURATION: float = 0.2
-const INPUT_BUFFER_PATIENCE = 0.1 # Input queue patience time
-const COYOTE_TIME = 0.08 # Coyote patience time
+const INPUT_BUFFER_PATIENCE = 1 # Input queue patience time
+const COYOTE_TIME = 0.09 # Coyote patience time
 const GHOST_SPAWN_INTERVAL = 0.035 # Interval between ghost spawns during dash
 const IFRAME_DURATION: float = 1.3
 
@@ -29,6 +29,8 @@ var dash_ghost_sprite: PackedScene
 
 var currentAttackCombo: int = 0
 var attack_buffered: bool = false
+var dash_buffered: bool = false
+# var jump_buffered: bool = false
 # var attack_held: bool = false
 var base_scale: Vector2 = Vector2(1.5, 1.5)
 var last_hit_source_position: Vector2 = Vector2.ZERO
@@ -80,15 +82,35 @@ func _process(_delta: float) -> void:
 		sprite.scale.x = base_scale.x
 	elif horizontal_input < 0:
 		sprite.scale.x = - base_scale.x
+
+
+	# if coyote_jump_available and not coyote_timer.is_stopped():
+	# 	print(str(coyote_jump_available) + " : " + str(coyote_timer.time_left));
+
+	if dash_buffered:
+		state_machine.change_state(PlayerState.DASH)
 	# attack_held = Input.is_action_pressed("attack")
 
 	# if attack_held:
 	# 	attack_buffered = true
 
+func _physics_process(_delta: float) -> void:
+	print(coyote_jump_available)
+	if not is_on_floor() and coyote_jump_available:
+		if coyote_timer.is_stopped():
+			coyote_timer.start()
+	# if coyote_jump_available and not coyote_timer.is_stopped():
+	# 	print(str(coyote_jump_available) + " : " + str(coyote_timer.time_left));
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("attack"):
 		attack_buffered = true
+	
+	if event.is_action_pressed("dash"):
+		dash_buffered = true
+
+	# if event.is_action_pressed("jump"):
+	# 	jump_buffered = true
 
 
 ## Returns the gravity based on the state of the player
@@ -127,7 +149,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 func take_damage(amount: int, source_pos: Vector2 = Vector2.ZERO) -> void:
 	health = health - amount
 	last_hit_source_position = source_pos
-	print("CURRENT HEALTH ",health)
+	print("CURRENT HEALTH ", health)
 	if health <= 0:
 		return
 	start_iframe()
@@ -151,7 +173,3 @@ func end_iframe() -> void:
 		iframe_tween.kill()
 	sprite.modulate.a = 1.0
 	return
-	
-	
-	
-	
