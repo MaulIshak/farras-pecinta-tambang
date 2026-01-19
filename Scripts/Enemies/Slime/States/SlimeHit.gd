@@ -15,6 +15,10 @@ func enter() -> void:
 	# Connect to animation finished signal specifically for this state
 	if not character.animation_player.animation_finished.is_connected(_on_animation_finished):
 		character.animation_player.animation_finished.connect(_on_animation_finished)
+	
+	if character.base_health <= 0:
+		await character.animation_player.animation_finished
+		finished.emit(DIE)
 
 func physics_process(delta: float) -> void:
 	character.velocity.x = move_toward(character.velocity.x, 0, delta)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cb2b854g1hs3"]
+[gd_scene load_steps=19 format=3 uid="uid://cb2b854g1hs3"]
 
 [ext_resource type="Script" uid="uid://da4jiwqj7deeg" path="res://Scripts/Enemies/Slime/Slime.gd" id="1_f4si1"]
 [ext_resource type="Shader" uid="uid://cwqcj06dgfldb" path="res://Scenes/hit.gdshader" id="2_paq7w"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://v6qdisxanc08" path="res://Scripts/Global/StateMachine/StateMachine.gd" id="4_paq7w"]
 [ext_resource type="Script" uid="uid://cypinywugkm5i" path="res://Scripts/Enemies/Slime/States/SlimePatrol.gd" id="5_f4si1"]
 [ext_resource type="Script" uid="uid://bust0uknn03nr" path="res://Scripts/Enemies/Slime/States/SlimeHit.gd" id="6_5gljc"]
+[ext_resource type="Script" uid="uid://dp2gn1cfqmhmr" path="res://Scripts/Enemies/Slime/States/SlimeDie.gd" id="7_e388w"]
 [ext_resource type="PackedScene" uid="uid://bn2x23kqfvo5p" path="res://Scenes/hitbox.tscn" id="7_vblni"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wqftc"]
@@ -43,6 +44,22 @@ tracks/1/keys = {
 "values": [0.0]
 }
 
+[sub_resource type="Animation" id="Animation_vblni"]
+resource_name = "die"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [16, 17, 18, 19, 20]
+}
+
 [sub_resource type="Animation" id="Animation_vl51c"]
 resource_name = "hit"
 length = 0.2
@@ -78,6 +95,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6hjy0"]
 _data = {
 &"RESET": SubResource("Animation_m3lqc"),
+&"die": SubResource("Animation_vblni"),
 &"hit": SubResource("Animation_vl51c"),
 &"idle": SubResource("Animation_wqftc")
 }
@@ -127,6 +145,10 @@ script = ExtResource("5_f4si1")
 
 [node name="Hit" type="Node" parent="StateMachine"]
 script = ExtResource("6_5gljc")
+
+[node name="Die" type="Node" parent="StateMachine"]
+script = ExtResource("7_e388w")
+metadata/_custom_type_script = "uid://dp2gn1cfqmhmr"
 
 [node name="Hurtbox" type="Area2D" parent="."]
 

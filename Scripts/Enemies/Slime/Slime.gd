@@ -34,9 +34,6 @@ func take_damage(amount: int, hit_position: Vector2 = Vector2.ZERO) -> void:
 		print("Slime is taking damage :<")
 		state_machine.change_state(SlimeState.HIT)
 
-func die() -> void:
-	queue_free()
-
 func flip_direction() -> void:
 	facing_direction *= -1
 	sprite.flip_h = (facing_direction == -1)
