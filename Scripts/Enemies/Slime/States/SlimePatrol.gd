@@ -10,7 +10,7 @@ func physics_process(_delta: float) -> void:
 	
 	# 2. Check for Turnaround Conditions
 	# A. Hit a wall?
-	if character.is_on_wall() or character.wall_detector.is_colliding():
+	if character.wall_detector.is_colliding():
 		character.flip_direction()
 		
 	# B. About to fall off a ledge?

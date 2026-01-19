@@ -28,11 +28,8 @@ func _physics_process(delta: float) -> void:
 func take_damage(amount: int, hit_position: Vector2 = Vector2.ZERO) -> void:
 	base_health -= amount
 	last_hit_position = hit_position
-	if base_health <= 0:
-		die()
-	else:
-		print("Slime is taking damage :<")
-		state_machine.change_state(SlimeState.HIT)
+	print("Slime is taking damage :<")
+	state_machine.change_state(SlimeState.HIT)
 
 func flip_direction() -> void:
 	facing_direction *= -1
