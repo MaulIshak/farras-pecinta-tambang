@@ -83,7 +83,6 @@ func _process(_delta: float) -> void:
 	elif horizontal_input < 0:
 		sprite.scale.x = - base_scale.x
 
-
 	# if coyote_jump_available and not coyote_timer.is_stopped():
 	# 	print(str(coyote_jump_available) + " : " + str(coyote_timer.time_left));
 
@@ -93,7 +92,7 @@ func _process(_delta: float) -> void:
 	# 	attack_buffered = true
 
 func _physics_process(_delta: float) -> void:
-	print(coyote_jump_available)
+	# print(coyote_jump_available)
 	if not is_on_floor() and coyote_jump_available:
 		if coyote_timer.is_stopped():
 			coyote_timer.start()

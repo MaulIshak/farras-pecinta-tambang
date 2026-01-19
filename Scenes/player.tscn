@@ -84,7 +84,7 @@ tracks/1/path = NodePath("Sprite2D/Hitbox/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1516482, 0.27272728),
+"times": PackedFloat32Array(0, 0.060606062, 0.27272728),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
@@ -125,7 +125,7 @@ tracks/1/path = NodePath("Sprite2D/Hitbox/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.18187524, 0.3019796),
+"times": PackedFloat32Array(0, 0.060606062, 0.3019796),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
@@ -166,7 +166,7 @@ tracks/1/path = NodePath("Sprite2D/Hitbox/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.15151516, 0.24123481),
+"times": PackedFloat32Array(0, 0.060606062, 0.24123481),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
