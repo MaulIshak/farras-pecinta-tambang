@@ -6,7 +6,7 @@ const SPEED = 300.0 # Base horizontal movement speed
 const ACCELERATION = 1500.0 # Base acceleration
 const FRICTION = 1400.0 # Base friction
 const GRAVITY = 2000.0 # Gravity when moving upwards
-const FALL_GRAVITY = 2000.0 # Gravity when falling downwards
+const FALL_GRAVITY = 1800.0 # Gravity when falling downwards
 const JUMP_VELOCITY = -600.0 # Maximum jump strength
 const DASH_SPEED_MULTIPLIER = 2.5
 const DASH_DURATION: float = 0.2
@@ -23,13 +23,13 @@ var coyote_jump_available := true
 var ghost_timer: Timer
 var iframe_timer: Timer
 var iframe_tween: Tween
+
 var is_dash_used_in_air: bool = false
 
 var dash_ghost_sprite: PackedScene
 
 var currentAttackCombo: int = 0
 var attack_buffered: bool = false
-var dash_buffered: bool = false
 # var jump_buffered: bool = false
 # var attack_held: bool = false
 var base_scale: Vector2 = Vector2(1.5, 1.5)
@@ -87,8 +87,6 @@ func _process(_delta: float) -> void:
 	# if coyote_jump_available and not coyote_timer.is_stopped():
 	# 	print(str(coyote_jump_available) + " : " + str(coyote_timer.time_left));
 
-	if dash_buffered:
-		state_machine.change_state(PlayerState.DASH)
 	# attack_held = Input.is_action_pressed("attack")
 
 	# if attack_held:
@@ -105,9 +103,6 @@ func _physics_process(_delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("attack"):
 		attack_buffered = true
-	
-	if event.is_action_pressed("dash"):
-		dash_buffered = true
 
 	# if event.is_action_pressed("jump"):
 	# 	jump_buffered = true
