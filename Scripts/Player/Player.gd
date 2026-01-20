@@ -46,6 +46,7 @@ var health = 5;
 @onready var hurtbox = $Hurtbox
 @onready var hurtbox_collision: CollisionShape2D = $Hurtbox/HurtboxCollision
 
+@onready var pendant_manager: PendantManager = $PendantManager
 
 @export var base_damage: int = 10
 
@@ -76,6 +77,9 @@ func _ready() -> void:
 	iframe_timer.one_shot = true
 	iframe_timer.timeout.connect(end_iframe)
 	add_child(iframe_timer)
+
+	print("health: " + str(health))
+	print("damage: " + str(base_damage))
 
 func _process(_delta: float) -> void:
 	if horizontal_input > 0:
@@ -167,3 +171,11 @@ func end_iframe() -> void:
 		iframe_tween.kill()
 	sprite.modulate.a = 1.0
 	return
+
+
+func equip_pendant(item: PendantItem) -> bool:
+	if pendant_manager:
+		return pendant_manager.equip_pendant(item)
+	else:
+		push_error("Player has no PendantManager!")
+		return false

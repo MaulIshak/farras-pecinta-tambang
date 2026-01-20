@@ -31,6 +31,10 @@ window/stretch/mode="viewport"
 
 enabled=PackedStringArray("res://addons/MetroidvaniaSystem/EditorExtension/plugin.cfg", "res://addons/MetroidvaniaSystem/plugin.cfg", "res://addons/gdterm/plugin.cfg")
 
+[global_group]
+
+Player=""
+
 [input]
 
 move_left={
@@ -77,6 +81,7 @@ spell={
 2d_physics/layer_2="Player"
 2d_physics/layer_3="Enemy"
 2d_physics/layer_4="Hitbox"
+2d_physics/layer_5="Collectible"
 
 [rendering]
 
