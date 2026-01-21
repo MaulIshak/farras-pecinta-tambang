@@ -1,0 +1,175 @@
+[gd_scene load_steps=25 format=3 uid="uid://cxf6d44js4m2l"]
+
+[ext_resource type="Script" uid="uid://dnjdknhfpydi6" path="res://Scripts/Enemies/Frog/Frog.gd" id="1_1eoe2"]
+[ext_resource type="Texture2D" uid="uid://fjiiha7ag0ys" path="res://Sprites/Enemies/ToxicFrog/GreenBlue/ToxicFrogGreenBlue_Hop.png" id="1_5iarh"]
+[ext_resource type="Texture2D" uid="uid://e76dq4fw7d3j" path="res://Sprites/Enemies/ToxicFrog/GreenBlue/ToxicFrogGreenBlue_Idle.png" id="2_ffctq"]
+[ext_resource type="Script" uid="uid://v6qdisxanc08" path="res://Scripts/Global/StateMachine/StateMachine.gd" id="3_ffctq"]
+[ext_resource type="Script" uid="uid://d04p57yqblpn1" path="res://Scripts/Enemies/Frog/States/FrogPrepareHop.gd" id="4_8ckdl"]
+[ext_resource type="Script" uid="uid://cewks5i147v6t" path="res://Scripts/Enemies/Frog/States/FrogIdle.gd" id="6_5ekf4"]
+[ext_resource type="Script" uid="uid://jpoc85i5nfd4" path="res://Scripts/Enemies/Frog/States/FrogHop.gd" id="6_8wsu2"]
+[ext_resource type="Script" uid="uid://wshla6rh8i2l" path="res://Scripts/Enemies/Frog/States/FrogFall.gd" id="7_w3hxx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x2xww"]
+atlas = ExtResource("1_5iarh")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5i31"]
+atlas = ExtResource("1_5iarh")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i64ve"]
+atlas = ExtResource("2_ffctq")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cx2gx"]
+atlas = ExtResource("2_ffctq")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m78k8"]
+atlas = ExtResource("2_ffctq")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pglre"]
+atlas = ExtResource("2_ffctq")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pvqqf"]
+atlas = ExtResource("2_ffctq")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_131c2"]
+atlas = ExtResource("2_ffctq")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1u5m5"]
+atlas = ExtResource("2_ffctq")
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5plp6"]
+atlas = ExtResource("2_ffctq")
+region = Rect2(336, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ekf4"]
+atlas = ExtResource("1_5iarh")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8wsu2"]
+atlas = ExtResource("1_5iarh")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w3hxx"]
+atlas = ExtResource("1_5iarh")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8evsk"]
+atlas = ExtResource("1_5iarh")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y5i31"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x2xww")
+}],
+"loop": true,
+"name": &"air",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y5i31")
+}],
+"loop": false,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i64ve")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cx2gx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m78k8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pglre")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pvqqf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_131c2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1u5m5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5plp6")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ekf4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8wsu2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w3hxx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8evsk")
+}],
+"loop": false,
+"name": &"prepare_hop",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5iarh"]
+size = Vector2(15, 12)
+
+[node name="Frog" type="CharacterBody2D"]
+collision_layer = 4
+script = ExtResource("1_1eoe2")
+speed = 30.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_y5i31")
+animation = &"fall"
+autoplay = "idle"
+offset = Vector2(0, -1)
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 2)
+shape = SubResource("RectangleShape2D_5iarh")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_ffctq")
+initial_state = NodePath("PrepareHop")
+metadata/_custom_type_script = "uid://v6qdisxanc08"
+
+[node name="PrepareHop" type="Node" parent="StateMachine"]
+script = ExtResource("4_8ckdl")
+
+[node name="Hop" type="Node" parent="StateMachine"]
+script = ExtResource("6_8wsu2")
+
+[node name="Fall" type="Node" parent="StateMachine"]
+script = ExtResource("7_w3hxx")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("6_5ekf4")
+
+[node name="FloorDetector" type="RayCast2D" parent="."]
+position = Vector2(-15, 0)
+target_position = Vector2(0, 20)
+
+[node name="WallDetector" type="RayCast2D" parent="."]
+position = Vector2(0, 3)
+target_position = Vector2(-15, 0)
