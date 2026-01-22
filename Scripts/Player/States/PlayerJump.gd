@@ -21,13 +21,13 @@ func physics_process(delta: float) -> void:
 	else:
 		player.velocity.x = move_toward(player.velocity.x, 0, (player.FRICTION * delta))
 	
-	# Add the gravity and handle jumping
-	if jump_attempted or player.input_buffer.time_left > 0:
-		if player.coyote_jump_available: # If jumping on the ground
-			player.velocity.y = player.JUMP_VELOCITY
-			player.coyote_jump_available = false
-		elif jump_attempted: # Queue input buffer if jump was attempted
-			player.input_buffer.start()
+	# # Add the gravity and handle jumping
+	# if jump_attempted or player.input_buffer.time_left > 0:
+	# 	# if player.coyote_jump_available: # If jumping on the ground
+	# 	# 	player.velocity.y = player.JUMP_VELOCITY
+	# 	# 	player.coyote_jump_available = false
+	# 	if jump_attempted: # Queue input buffer if jump was attempted
+	# 		player.input_buffer.start()
 
 	# Shorten jump if jump key is released
 	if Input.is_action_just_released("jump") and player.velocity.y < 0:
@@ -52,9 +52,9 @@ func physics_process(delta: float) -> void:
 			finished.emit(DASH)
 			return
 
-		if player.coyote_jump_available:
-			if player.coyote_timer.is_stopped():
-				player.coyote_timer.start()
+		# if player.coyote_jump_available:
+		# 	if player.coyote_timer.is_stopped():
+		# 		player.coyote_timer.start()
 
 		player.velocity.y += player.calculate_gravity() * delta
 		

@@ -112,6 +112,7 @@ size = Vector2(17.333336, 8.666668)
 scale = Vector2(3, 3)
 collision_layer = 4
 script = ExtResource("1_f4si1")
+speed = 30.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_wqftc")

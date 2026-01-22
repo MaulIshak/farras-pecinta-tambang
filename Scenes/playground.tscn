@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=4 uid="uid://cnkmlfbbfg4dm"]
+[gd_scene load_steps=9 format=4 uid="uid://cnkmlfbbfg4dm"]
 
 [ext_resource type="Script" uid="uid://bpbxlur51125h" path="res://Scripts/test.gd" id="1_uof5o"]
 [ext_resource type="Texture2D" uid="uid://bq61u55yq766w" path="res://Sprites/Environment/TX Tileset Ground.png" id="2_6xle2"]
 [ext_resource type="PackedScene" uid="uid://cb2b854g1hs3" path="res://Scenes/slime.tscn" id="3_qyfof"]
 [ext_resource type="PackedScene" uid="uid://cuhe4kl0rlhf7" path="res://Scenes/player.tscn" id="3_u4ce8"]
+[ext_resource type="PackedScene" path="res://Scenes/pendant.tscn" id="5_3e07v"]
+[ext_resource type="PackedScene" uid="uid://cxf6d44js4m2l" path="res://Scenes/Enemies/frog.tscn" id="6_vl51c"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u4ce8"]
 texture = ExtResource("2_6xle2")
@@ -1348,3 +1350,22 @@ zoom = Vector2(0.85, 0.85)
 limit_enabled = false
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
+
+[node name="Pendant" parent="." instance=ExtResource("5_3e07v")]
+position = Vector2(-2820, 201)
+
+[node name="Pendant2" parent="." instance=ExtResource("5_3e07v")]
+position = Vector2(-2774, 201)
+
+[node name="Pendant3" parent="." instance=ExtResource("5_3e07v")]
+position = Vector2(-2722, 200)
+
+[node name="Pendant4" parent="." instance=ExtResource("5_3e07v")]
+position = Vector2(-2691, 200)
+
+[node name="Frog" parent="." instance=ExtResource("6_vl51c")]
+position = Vector2(-2758, 208)
+
+[node name="Frog2" parent="." instance=ExtResource("6_vl51c")]
+position = Vector2(-2764, 49)
+speed = 45.0

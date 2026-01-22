@@ -14,16 +14,20 @@ func process(_delta: float) -> void:
 	if Input.is_action_just_pressed("attack"):
 		player.attack_buffered = true
 
+
 	if player.basicAttackComboTimer.time_left > 0 and player.basicAttackRateTimer.time_left <= 0.001:
 		if player.attack_buffered or Input.is_action_pressed("attack"):
 			player.attack_buffered = false
 			finished.emit(ATTACK2)
 			return
-
-        
-
+	
 	if not player.animation_player.is_playing():
 		player.basicAttackRateTimer.stop()
+		# if player.dash_buffered:
+		# 	# print("Pindah woy ke state DASH")
+		# 	finished.emit(DASH)
+		# 	return
+
 		if player.horizontal_input != 0:
 			finished.emit(RUN)
 		else:

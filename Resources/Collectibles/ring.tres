@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="PendantItem" load_steps=3 format=3 uid="uid://dcvhcwpeuk7yb"]
+
+[ext_resource type="Script" uid="uid://ccx047dwx6am7" path="res://Scripts/Collectibles/Pendants/PendantItem.gd" id="1_rr8m4"]
+[ext_resource type="Texture2D" uid="uid://8vps38ltxu33" path="res://Sprites/Pendant/Ring.png" id="2_rkj55"]
+
+[resource]
+script = ExtResource("1_rr8m4")
+health_bonus = 2
+basic_attack_bonus = 2
+texture = ExtResource("2_rkj55")
+metadata/_custom_type_script = "uid://ccx047dwx6am7"

@@ -22,6 +22,11 @@ func process(_delta: float) -> void:
 
 	if not player.animation_player.is_playing():
 		player.basicAttackRateTimer.stop()
+		# if player.dash_buffered:
+		# 	# print("Pindah woy ke state DASH")
+		# 	finished.emit(DASH)
+		# 	return
+
 		if player.horizontal_input != 0:
 				finished.emit(RUN)
 		else:

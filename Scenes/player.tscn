@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cuhe4kl0rlhf7"]
+[gd_scene load_steps=32 format=3 uid="uid://cuhe4kl0rlhf7"]
 
 [ext_resource type="Script" uid="uid://chmds7vhs5erb" path="res://Scripts/Player/Player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://ba1ftf3iu54ob" path="res://Sprites/Player/adventurer-Sheet.png" id="1_v0iea"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://binh76eqlnq6t" path="res://Scripts/Player/States/PlayerSpell.gd" id="12_ukyrk"]
 [ext_resource type="PackedScene" uid="uid://bnbn43fpwi6kk" path="res://Scenes/spell_projectile.tscn" id="13_7dp3o"]
 [ext_resource type="Script" uid="uid://bdurvqmybni5f" path="res://Scripts/Player/States/PlayerHit.gd" id="14_7dp3o"]
+[ext_resource type="Script" uid="uid://dhgc7u165s2fm" path="res://Scripts/Player/PendantManager.gd" id="15_h4iuc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gymyn"]
 size = Vector2(12.527778, 18)
@@ -84,7 +85,7 @@ tracks/1/path = NodePath("Sprite2D/Hitbox/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1516482, 0.27272728),
+"times": PackedFloat32Array(0, 0.060606062, 0.27272728),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
@@ -125,7 +126,7 @@ tracks/1/path = NodePath("Sprite2D/Hitbox/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.18187524, 0.3019796),
+"times": PackedFloat32Array(0, 0.060606062, 0.3019796),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
@@ -166,7 +167,7 @@ tracks/1/path = NodePath("Sprite2D/Hitbox/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.15151516, 0.24123481),
+"times": PackedFloat32Array(0, 0.060606062, 0.24123481),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
@@ -302,7 +303,7 @@ turbulence_noise_strength = 5.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_ukyrk"]
 radius = 7.363574
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 scale = Vector2(1.5, 1.5)
 collision_layer = 2
 script = ExtResource("1_cvnsp")
@@ -392,6 +393,9 @@ collision_mask = 8
 position = Vector2(0, 6)
 shape = SubResource("CircleShape2D_ukyrk")
 debug_color = Color(0.972549, 0, 0, 0.45882353)
+
+[node name="PendantManager" type="Node" parent="."]
+script = ExtResource("15_h4iuc")
 
 [connection signal="area_entered" from="Sprite2D/Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="timeout" from="BasicAttackComboTimer" to="." method="_on_basic_attack_combo_timer_timeout"]
